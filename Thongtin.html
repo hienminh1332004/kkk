@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Thongtin.css">
+    <!-- <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+   
+</head>
+<body>
+    
+    <header style="background-color: white; width: 100%" class="scroll-down-header">
+        <header class="header-container">
+            <div class="header-logo" >
+                <a href="">
+                    <img alt="image" src="https://lacvietauction.vn/files/frontend/images/core/logo-dau-gia-lac-viet.png" style="width: 200.73px; height: 56.5px;">
+                </a>
+            </div>
+            <div class="main-menu">
+                <ul class="menu-list">
+                    <li class="menu-item-has-children">
+                        <a href="">Tài sản đấu giá <span class="arrow">▲</span></a>
+                        <ul class="submenu">
+                            <li><a href="">Tài sản nhà nước</a></li>
+                            <li><a href="">Bất động sản</a></li>
+                            <li><a href="">Phương tiện - xe cộ</a></li>
+                            <li><a href="">Sưu tầm - nghệ thuật</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="menu-item-has-children">
+                        <a href="">Cuộc đấu giá <span class="arrow">▲</span></a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="">Cuộc đấu giá sắp đấu giá</a>
+                            </li>
+                            <li>
+                                <a href="">Cuộc đấu giá đang diễn ra</a>
+                            </li>
+                            <li>
+                                <a href="">Cuộc đấu giá đã kết thúc</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="">Tin tức <span class="arrow">▲</span></a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="">Thông báo</a>
+                            </li>
+                            <li>
+                                <a href="">Thông báo đấu giá</a>
+                            </li>
+                            <li>
+                                <a href="">Tin khác</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">Giới thiệu</a>
+                    </li>
+                    <li>
+                        <a href="">Liên hệ</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="server-time-clock" data-v-65fff26b="" aria-haspopup="true" class="wrapper-AtBcr u-isActionable u-textLeft u-inlineBlock u-borderNone u-textBold u-textNoWrap Arrange Arrange--middle u-userLauncherColor" data-time="1727859990800" >
+               
+                    <div style="font-size: 30px; font-weight: bold;" id="time-part1"></div>
+                    <div  style="font-size: 18px;" id="date-part1"></div>
+            </div>
+            <div class="detail-button log" id="login"  style="padding: 16px;position: relative;">
+                <a id="login-text" style="font-size: 25px; text-decoration: none; align-items: center; color: white; font-weight: bold;font-family: Montserrat,sans-serif;" href="javascript:void(0)">Đăng Nhập</a>
+                
+                <div id="user-submenu" style="display: none;">
+                    <ul style="list-style-type: none; padding: 0;">
+                        <li> <i class="fas fa-user-circle"></i> <a href="Thongtin.html#ho-so">Thông tin cá nhân</a></li>
+                        <li> <i class="fas fa-history"></i> <a href="Thongtin.html#lich-su-dau-gia">Lịch sử đấu giá</a></li>
+                        <li> <i class="fas fa-sign-out-alt"></i> <a href="javascript:void(0)">Đăng xuất</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+        </header>
+    </header>
+    <script>
+        function updateTimeAndDate() {
+        const timeElement = document.getElementById('time-part1');
+        const dateElement = document.getElementById('date-part1');
+
+            // Lấy thời gian hiện tại ở múi giờ Việt Nam (Asia/Ho_Chi_Minh)
+            const vietnamTime = new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" });
+            const currentDate = new Date(vietnamTime);
+    
+            // Định dạng giờ phút giây
+            const hours = String(currentDate.getHours()).padStart(2, '0');
+            const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+            const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+    
+            timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+    
+        // Định dạng ngày tháng
+        const days = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+        const dayOfWeek = days[currentDate.getDay()];
+        const day = currentDate.getDate();
+        const month = currentDate.getMonth() + 1; // Tháng bắt đầu từ 0
+        const year = currentDate.getFullYear();
+    
+        dateElement.textContent = `${dayOfWeek}, ${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
+    }
+
+        // Cập nhật mỗi giây
+        setInterval(updateTimeAndDate, 1000);
+    
+        // Gọi hàm ngay khi tải trang
+        updateTimeAndDate();
+
+    </script>   
+
+    <!-- Phần Thân -->
+    <div class="container" style="width: 1280px; margin-bottom:119px; margin-top: 119px;">
+        <div id="banner-new" style="padding-top: 32px; padding-bottom: 26px; border-bottom: 1px solid #E0E0E0; background-image: url('');background-position: right;  background-repeat: no-repeat; background-size: contain">
+            <h2 class="current-page">Thông tin cá nhân</h2>
+            <div class="link-redirect">
+                <a  class="page-index" href="/home.html">Trang chủ</a> / <span class="page-des ellipsis1 currentPageDetail" style="font-weight: bold;">Thông tin cá nhân</span>
+            </div>
+        </div>
+    
+    
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            // Kiểm tra trạng thái đăng nhập
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const username = localStorage.getItem('username');
+
+            if (isLoggedIn && username) {
+                // Hiển thị tên người dùng
+                document.getElementById('login-text').innerHTML = `<i class="fas fa-user"></i> ${username}`;
+                document.getElementById('login').classList.add('logged-in');
+
+            }
+            // Lấy hash từ URL (ví dụ: #ho-so, #lich-su-dau-gia)
+            var tabname = window.location.hash;
+    
+            // Nếu có hash, điều hướng đến tab tương ứng
+            if (tabname) {
+                // Đặt màu cho tất cả các nút về mặc định
+                // document.querySelectorAll(".nav-link").forEach(function(btn) {
+                //     btn.classList.remove("active-tab");
+                // });
+    
+                // Ẩn tất cả các nội dung của tab
+                document.querySelectorAll(".tab-pane").forEach(function(content) {
+                    content.classList.remove("active", "show");
+                });
+    
+                // Hiển thị nội dung tab và tô đỏ nút của tab được chọn
+                var tabButton = document.querySelector(`.nav-link[data-bs-target="${tabname}"]`);
+                var tabContent = document.querySelector(tabname);
+    
+                if (tabButton && tabContent) {
+                    tabButton.classList.add("active");
+                    tabButton.setAttribute("aria-selected", "true"); // Đặt aria-selected thành true cho nút được chọn
+                    tabContent.classList.add("active", "show");
+                }
+            }
+        });
+    </script>
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const tabButtons = document.querySelectorAll(".nav-link.nav-btn-style");
+
+    tabButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            // Xóa 'active' và aria-selected từ tất cả các nút
+            tabButtons.forEach(btn => {
+                btn.classList.remove("active");
+                btn.setAttribute("aria-selected", "false");
+            });
+            
+            // Bỏ 'show active' khỏi tất cả các tab content
+            document.querySelectorAll(".tab-pane").forEach(content => content.classList.remove("active", "show"));
+
+            // Cập nhật aria-selected và thêm lớp 'active' cho button được chọn
+            this.setAttribute("aria-selected", "true");
+            this.classList.add("active");
+
+            // Hiển thị nội dung tab tương ứng
+            const targetContent = document.querySelector(this.getAttribute("data-bs-target"));
+            targetContent.classList.add("active", "show");
+        });
+    });
+});
+
+    </script> -->
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const tabButtons = document.querySelectorAll(".nav-link.nav-btn-style");
+
+    tabButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            // Xóa 'active' và aria-selected từ tất cả các nút
+            tabButtons.forEach(btn => {
+                btn.classList.remove("active");
+                btn.setAttribute("aria-selected", "false");
+            });
+
+            // Bỏ 'show active' khỏi tất cả các tab content
+            document.querySelectorAll(".tab-pane").forEach(content => content.classList.remove("active", "show", "fade"));
+
+            // Cập nhật aria-selected và thêm lớp 'active' cho button được chọn
+            this.setAttribute("aria-selected", "true");
+            this.classList.add("active");
+
+            // Hiển thị nội dung tab tương ứng với hiệu ứng mờ dần
+            const targetContent = document.querySelector(this.getAttribute("data-bs-target"));
+            targetContent.classList.add("fade", "active");
+            
+            // Thêm lớp `show` với một chút độ trễ để kích hoạt hiệu ứng chuyển đổi
+            setTimeout(() => targetContent.classList.add("show"), 265);
+        });
+    });
+});
+
+    </script>
+
+<!-- <div class="dashboard-section pt-120 pb-12" style="background-color: #dadce0;"> -->
+    <div class="container" >
+        <div class="row g-4">
+            <div class="col-lg-3" style="margin-left: -13px;" >
+                <div class="nav flex-column nav-pills gap-4" data-wow-duration="1.5s" data-wow-delay=".2s" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    
+                    
+                    <button class="nav-link  nav-btn-style mx-auto mb-20 " id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#ho-so" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false" >
+                        
+                        <i class="fas fa-user"></i></i> Thông tin cá nhân
+                    </button>
+                    
+                 
+                    <button class="nav-link nav-btn-style mx-auto mb-20" id="v-pills-order-tab" data-bs-toggle="pill" data-bs-target="#lich-su-dau-gia" type="button" role="tab" aria-controls="v-pills-order" aria-selected="false" >
+                        <i class="fas fa-history"></i> Lịch sử đấu giá
+                    </button>
+                    
+                    <button class="nav-link nav-btn-style mx-auto" type="button" role="tab" onclick="javascript:Logout();">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade  " id="ho-so" role="tabpanel" aria-labelledby="v-pills-profile-tab" style="background-color: #fff; margin-left: -15px;">
+                        <div class="dashboard-profile">
+                            <div class="owner " style="background-position: center; ;background-repeat: no-repeat; background-size: contain; display: flex; margin-left: 50px;">
+                                <div class="image">
+                                    <img style="width: 100px; height: 100px; object-fit: cover;" src="https://ben.com.vn/tin-tuc/wp-content/uploads/2021/12/anh-che-cho-hai-huoc-cho-dien-thoai-4.jpg" alt="Ảnh">
+                                </div>
+                                <div class="content">
+                                    <h3>Phạm</h3>
+                                    <a class="btn-changepassword" onclick="">Đổi mật khẩu</a>
+                                    <!-- <a class="btn-changepassword" onclick="resetPassword()">Đổi mật khẩu</a> -->
+                                </div>
+                            </div>
+                            <div class="form-wrapper" style="padding:0px 40px 40px 40px; margin-top: 50px; box-shadow: unset;">
+                                <form action="#">
+                                    <div class="container res-mobile">
+                                        <div class="row layout">
+                                            <div class="personal-info" style="display: flex; margin-bottom: 20px;">
+                                                <h2 class="personal-info-txt">Thông tin cá nhân</h2>
+                                                <div class="button-group" style="margin-top:0px; ">
+                                                    <button type="button" onclick="updateAccount()" class="eg-btn profile-btn">
+                                                        Cập nhật
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-12 col-md-6">
+                                                <div class="form-inner">
+                                                    <input type="text" value="Ph&#x1EA1;m" id="LastName" required>
+                                                    <label class="label-form">Họ</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-12 col-md-6">
+                                                <div class="form-inner">
+                                                    <input type="text" id="MiddleName" value="V&#x103;n" required>
+                                                    <label  class="label-form">Tên đệm</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-12 col-md-6">
+                                                <div class="form-inner">
+                                                    <input type="text" id="FirstName" value="Ph&#xF4;n" required>
+                                                    <label class="label-form">Tên</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-12 col-md-6">
+                                                <div class="form-inner">
+                                                    <select tabindex="16" id="Gender" class="form-control input select2">
+                                                        <option value="0" selected disabled>Chọn giới tính</option>
+                                                        <option value="MALE">Nam</option>
+                                                        <option value="FEMALE">Nữ</option>
+                                                        <option value="3">Khác</option>
+                                                    </select>
+                                                    <label class="label-form-gender">Giới tính </label>
+                                                </div>
+                                            </div>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    $("#Gender").val('MALE').trigger('change');
+                                                });
+                                            </script>
+                                            <div class="col-xl-4 col-lg-12 col-md-6">
+                                                <div class="form-inner">
+                                                    <input class="date datepicker" value="15/12/2004" id="DoB" type="text" required style=" padding: 10px 25px 10px 20px;" />
+                                                    <span class="input-group-addon" style="position: absolute; right: 5px; top: 10px;">     </span>
+                                                    <label class="label-form-date">Ngày sinh</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-12 col-md-6">
+                                                <div class="form-inner">
+                                                    <input type="text" id="account_phonenumber" placeholder="+84" value="0339548443">
+                                                    <label class="label-form">Số điện thoại</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-8 col-lg-12 col-md-6">
+                                                <div class="form-inner">
+                                                    <input type="email" id="Email" placeholder="demo@gmail.com" value="pk779981@gmail.com">
+                                                    <label class="label-form">Email</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-12 col-md-6">
+                                                <div class="form-inner">
+                                                    <input type="text" id="Zipcode" value="">
+                                                    <label class="label-form">Mã bưu chính</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12 col-lg-12 col-md-6">
+                                                <div class="form-inner">
+                                                    <input type="text" name="message" id="addressDetail" value="55 T&#xF4;n Th&#x1EA5;t B&#xE1;ch" required>
+                                                    <label class="label-form">Địa chỉ</label>
+                                                </div>
+                                            </div>
+                                            
+                        
+                                            <div class="col-xl-4 col-lg-12 col-md-6">
+                                                <div class="form-inner">
+                                                    <input type="text" name="IdCardNumber" id="IdCardNumber" value="046024000632" required>
+                                                    <label class="label-form">CMND/CCCD</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-12 col-md-6">
+                                                <div class="form-inner">
+                                                            <input class="date datepicker" value="28/03/2021" id="IdCardGrantedDate" type="text" required style=" padding: 10px 25px 10px 20px;" />
+                                                    
+                                                    <label class="label-form">Ngày cấp</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-12 col-md-6">
+                                                <div class="form-inner">
+                                                    <input type="text" name="IdCardGrantedPlace" id="IdCardGrantedPlace" value="C&#x1EE5; c&#x1EA3;nh s&#xE1;t qu&#x1EA3;n l&#xFD; h&#xE0;nh ch&#xED;nh v&#x1EC1; tr&#x1EAD;t t&#x1EF1; x&#xE3; h&#x1ED9;i" required>
+                                                    <label class="label-form">Nơi cấp</label>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                                        <div class="row layout">
+                                                            <div class="personal-info" style="display: flex; margin-bottom: 30px;">
+                                                                <h2 class="personal-info-txt">Thông tin ngân hàng</h2>
+                                                                <div class="button-group" style="margin-top:0px;">
+                                                                    <button type="button" onclick="updateBankAccount()" class="eg-btn profile-btn">
+                                                                        Cập nhật
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-inner">
+                                                                    <input type="text" name="BankAccountNumber" id="bankAccountNumber" value="0339548443" required>
+                                                                    <label class="label-form">Số tài khoản ngân hàng</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-inner">
+                                                                    <select tabindex="16" id="BankId" class="form-control input select2">
+                                                                        <option value="0" disabled>Chọn</option>
+                                                                    </select>
+                                                                    <label class="label-form-NH">Tên ngân hàng </label>
+                                                                </div>
+                                                            </div>
+                                                            <script>
+                                                                $(document).ready(function () {
+                                                                    let databank = [{"Id":1000043,"BankTypeId":1000001,"Name":"Kho bạc nhà nước Việt Nam","Description":"","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2021-05-05T08:30:05.507","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000042,"BankTypeId":1000001,"Name":"VIETINBANK_Ngân hàng TMCP Công thương Việt Nam","Description":"VIETINBANK","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-24T04:20:05.917","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000041,"BankTypeId":1000001,"Name":"STB_Ngân hàng TMCP Sài Gòn Thương Tín","Description":"STB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.153","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000040,"BankTypeId":1000001,"Name":"IBK_Ngân hàng IBK chi nhánh Hà Nội","Description":"IBK","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.153","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000039,"BankTypeId":1000001,"Name":"VCCB_Ngân hàng TMCP Bản Việt","Description":"VCCB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.153","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000038,"BankTypeId":1000001,"Name":"KLB_Ngân hàng TMCP Kiên Long","Description":"KLB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.153","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000037,"BankTypeId":1000001,"Name":"LPB_Ngân hàng TMCP Bưu Điện Liên Việt","Description":"LBP","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.153","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000036,"BankTypeId":1000001,"Name":"OCB_Ngân hàng TMCP Phương Đông","Description":"OCB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.153","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000035,"BankTypeId":1000001,"Name":"SHB_Ngân hàng TMCP Sài Gòn","Description":"SHB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.153","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000034,"BankTypeId":1000001,"Name":"HLB_Ngân hàng TNHH MTV Hongleong Việt Nam","Description":"HLB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000033,"BankTypeId":1000001,"Name":"VIB_Ngân hàng TMCP Quốc tế Việt Nam","Description":"VIB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000032,"BankTypeId":1000001,"Name":"SEAB_Ngân hàng TMCP Đông Nam Á","Description":"SEAB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000031,"BankTypeId":1000001,"Name":"PBVN_Ngân hàng TBHH MTV Public Việt Nam","Description":"PBVN","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000030,"BankTypeId":1000001,"Name":"BVB_Ngân hàng TMCP Bảo Việt","Description":"BVB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000029,"BankTypeId":1000001,"Name":"HDB_Ngân hàng TMCP Phát triển Thành Phố Hồ Chí Minh","Description":"","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000028,"BankTypeId":1000001,"Name":"VCB_Ngân hàng TMCP Ngoại Thương Việt Nam","Description":"VCB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000027,"BankTypeId":1000001,"Name":"IVB_Ngân hàng TNHH Indovia","Description":"IVB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000026,"BankTypeId":1000001,"Name":"VIETBANK_Ngân hàng TMCP Thương Tín","Description":"VIWTBANK","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000025,"BankTypeId":1000001,"Name":"VPB_Ngân hàng TMCP Việt Nam Thịnh Vượng","Description":"","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000024,"BankTypeId":1000001,"Name":"EIB_Ngân hàng TMCP Xuất Nhập Khẩu Việt Nam","Description":"EIB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000023,"BankTypeId":1000001,"Name":"PGB_Ngân hàng TMCP Xăng Dầu Petrolimex","Description":"PGB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000022,"BankTypeId":1000001,"Name":"SCB_Ngân hàng TMCP Sài Gòn","Description":"SCB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000021,"BankTypeId":1000001,"Name":"NAMABANK_Ngân hàng TMCP Nam Á","Description":"NAMABANK","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000020,"BankTypeId":1000001,"Name":"VAB_Ngân hàng TMCP Việt Á","Description":"VAB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000019,"BankTypeId":1000001,"Name":"MSB_Ngân hàng TMCP Hàng Hải","Description":"MSB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000018,"BankTypeId":1000001,"Name":"ABB_Ngân hàng TMCP An Bình","Description":"ABB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000017,"BankTypeId":1000001,"Name":"SHBVN_Ngân hàng TNHH MTV ShinHan Việt Nam","Description":"SHBVN","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000016,"BankTypeId":1000001,"Name":"TPB_Ngân hàng TMCP Tiên Phong","Description":"TPB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000015,"BankTypeId":1000001,"Name":"MB_Ngân hàng TMCP Quân Đội","Description":"MB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000014,"BankTypeId":1000001,"Name":"VRB_Ngân hàng Liên doanh Việt Nga","Description":"VRB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000013,"BankTypeId":1000001,"Name":"NCB_Ngân hàng TMCP Quốc Dân","Description":"NCB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000012,"BankTypeId":1000001,"Name":"BIDV_Ngân hàng TMCP Đầu tư và Phát triển Việt Nam","Description":"BIDV","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000011,"BankTypeId":1000001,"Name":"ACB_Ngân hàng TMCP Á Châu","Description":"ACB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000010,"BankTypeId":1000001,"Name":"OJB_Ngân hàng TMCP Đại Dương","Description":"OJB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-08-15T13:52:17.147","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000009,"BankTypeId":1000001,"Name":"PVCOMBANK_Ngân hàng TMCP Đại Chúng Việt Nam","Description":"PVCOMBANK","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-03-24T15:52:32.907","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000008,"BankTypeId":1000001,"Name":"BAB_Ngân hàng TMCP Bắc Á","Description":"BAB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-03-24T15:52:17.83","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000007,"BankTypeId":1000001,"Name":"GPB_Ngân hàng TM TNHH MTV Dầu Khí Toàn Cầu","Description":"GPB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-03-24T15:52:04.28","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000006,"BankTypeId":1000001,"Name":"TCB_Ngân hàng TMCP Kỹ Thương Việt Nam","Description":"TCB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-03-24T15:51:39.137","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000005,"BankTypeId":1000001,"Name":"DONGABANK_Ngân hàng TMCP Đông Á","Description":"DONGABANK","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-03-24T15:51:24.46","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000004,"BankTypeId":1000001,"Name":"AGRIBANK_Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam","Description":"AGRIBANK","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-03-24T15:51:13.65","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000002,"BankTypeId":1000001,"Name":"WOO_Ngân hàng Wooribank","Description":"WOO","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-03-24T15:50:44.143","BankType":null,"BankAccount":[],"BankMeta":[]},{"Id":1000001,"BankTypeId":1000001,"Name":"SGB_Ngân hàng TMCP Sài Gòn Công Thương","Description":"SGB","Info":"","Url":"","Photo":"","Active":1,"CreatedTime":"2020-02-11T04:06:16.237","BankType":null,"BankAccount":[],"BankMeta":[]}];
+                                                                    let newOptionZero = new Option('Chọn + Tên ngân hàng', 0, false, false);
+                                                                    $("#BankId").append(newOptionZero).trigger("change");
+                                                                    databank.forEach(function (item, index) {
+                                                                        var data = {
+                                                                            id: item.Id,
+                                                                            text: item.Name
+                                                                        };
+                                                                        var newOption = new Option(data.text, data.id, false, false);
+                                                                        $("#BankId").append(newOption);
+                                                                        $("#BankId").val(1000015).trigger("change");
+                                                                    })
+                                                                });
+                                                            </script>
+                                                            <div class="col-md-12">
+                                                                <div class="form-inner">
+                                                                    <input type="text" name="BankAccountBranch" id="bankAccountBranch" value="Chi Nh&#xE1;nh Li&#xEA;n Chi&#x1EC3;u" required>
+                                                                    <label class="label-form">Chi nhánh ngân hàng</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-inner">
+                                                                    <input type="text" name="BankAccountOwn" id="bankAccountName" value="PHAM VAN PHON" required>
+                                                                    <label class="label-form">Tên chủ tài khoản</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                        
+                                       
+                                    </div>
+                                </form>
+                            </div>
+                            
+                        </div>
+                    </div>
+    
+    
+                    <!-- lich sử đấu giá -->
+                    <div class="tab-pane fade" id="lich-su-dau-gia" role="tabpanel"
+                    aria-labelledby="v-pills-order-tab">
+                   <div class="dashboard-area box--shadow">
+                       <div class="row g-4">
+                           <div class="col-md-12 col-sm-12">
+                               <div class="dashboard-card"
+                                    data-wow-duration="1.5s" data-wow-delay=".2s">
+                                   <div class="header">
+                                       <h5>Lịch sử đấu giá</h5>
+                                   </div>
+                                   <div class="body" style="display: flex; background-color: #fff;">
+                                       <div>
+                                           <div class="rating-flex">
+                                               <div class="rating-div">
+                                                   <p class="rating-number">0</p>
+                                                   <p class="rating-text" style="margin-top: 8px">Yêu cầu</p>
+                                                   <p class="rating-text" style="margin-top: 5px">tham gia đấu giá</p>
+                                               </div>
+                                               <div class="rating-div">
+                                                   <p class="rating-number">0</p>
+                                                   <p class="rating-text" style="margin-top: 8px">Yêu cầu tham gia đấu giá</p>
+                                                   <p class="rating-text" style="margin-top: 5px">được duyệt</p>
+                                               </div>
+                                               <div class="rating-div">
+                                                   <p class="rating-number">0</p>
+                                                   <p class="rating-text" style="margin-top: 8px">Tài sản</p>
+                                                   <p class="rating-text" style="margin-top: 5px">Trúng đấu giá</p>
+                                               </div>
+                                               <div class="rating-div">
+                                                   <p class="rating-number">0 &#x20AB;</p>
+                                                   <p class="rating-text" style="margin-top: 8px">Tổng giá trị tài sản</p>
+                                                   <p class="rating-text" style="margin-top: 5px">đã trúng đấu giá</p>
+                                               </div>
+                                           </div>
+                                           
+                                           <div class="table-wrapper" style="padding:20px;">
+                                                <div id="tableDataBiddingHistory_wrapper" class="dataTables_wrapper no-footer">
+                                            
+                                                    <!-- <div class="dataTables_length" id="tableDataBiddingHistory_length">
+                                                        <label>Xem 
+                                                            <select name="tableDataBiddingHistory_length" aria-controls="tableDataBiddingHistory" class="">
+                                                                <option value="-1">Tất cả</option>
+                                                                <option value="10">10</option>
+                                                                <option value="25">25</option>
+                                                                <option value="50">50</option>
+                                                                <option value="100">100</option>
+                                                                <option value="200">200</option>
+                                                            </select> mục
+                                                        </label>
+                                                    </div> -->
+                                            
+                                                    <!-- <div id="tableDataBiddingHistory_filter" class="dataTables_filter">
+                                                        <label>Tìm:
+                                                            <input type="search" class="" placeholder="" aria-controls="tableDataBiddingHistory">
+                                                        </label>
+                                                    </div> -->
+                                            
+                                                    <table class="eg-table order-table table mb-0 row-border no-footer dataTable" id="tableDataBiddingHistory" aria-describedby="tableDataBiddingHistory_info">
+                                                        <thead class="thead-bidding">
+                                                            <tr>
+                                                                <th class="sorting" tabindex="0" aria-controls="tableDataBiddingHistory" rowspan="1" colspan="1" style="width: 32.8667px;" aria-label="STT: activate to sort column ascending">STT</th>
+                                                                <th class="sorting" tabindex="0" aria-controls="tableDataBiddingHistory" rowspan="1" colspan="1" style="width: 86.8667px;" aria-label="Tên tài sản: activate to sort column ascending">Tên tài sản</th>
+                                                                <th class="sorting" tabindex="0" aria-controls="tableDataBiddingHistory" rowspan="1" colspan="1" style="width: 82.8667px;" aria-label="Trạng thái: activate to sort column ascending">Trạng thái</th>
+                                                                <th class="sorting" tabindex="0" aria-controls="tableDataBiddingHistory" rowspan="1" colspan="1" style="width: 55.8667px;" aria-label="Mã KH: activate to sort column ascending">Mã KH</th>
+                                                                <th class="sorting sorting_desc" tabindex="0" aria-controls="tableDataBiddingHistory" rowspan="1" colspan="1" style="width: 89.8667px;" aria-label="Mở đấu giá: activate to sort column ascending" aria-sort="descending">Mở đấu giá</th>
+                                                                <th class="sorting" tabindex="0" aria-controls="tableDataBiddingHistory" rowspan="1" colspan="1" style="width: 80.8667px;" aria-label="KQ trả giá: activate to sort column ascending">KQ trả giá</th>
+                                                                <th class="sorting" tabindex="0" aria-controls="tableDataBiddingHistory" rowspan="1" colspan="1" style="width: 60.8667px;" aria-label="Chi tiết: activate to sort column ascending">Chi tiết</th>
+                                                            </tr>
+                                                        </thead>
+                                            
+                                                        <tbody>
+                                                            <tr class="odd">
+                                                                <td valign="top" colspan="7" class="dataTables_empty"></td> <!-- phần load dữ liệu in ra-->
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                            
+                                                  
+                                            
+                                                    <!-- <div class="dataTables_paginate paging_simple_numbers" id="tableDataBiddingHistory_paginate">
+                                                        <a class="paginate_button previous disabled" aria-controls="tableDataBiddingHistory" aria-disabled="true" aria-role="link" data-dt-idx="previous" tabindex="-1" id="tableDataBiddingHistory_previous">Trước</a>
+                                                        <span></span>
+                                                        <a class="paginate_button next disabled" aria-controls="tableDataBiddingHistory" aria-disabled="true" aria-role="link" data-dt-idx="next" tabindex="-1" id="tableDataBiddingHistory_next">Tiếp</a>
+                                                    </div> -->
+                                            
+                                                </div>
+                                            
+                                            </div>
+                                        
+                                        </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+               
+                       </div>
+                   </div>
+               </div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- </div> -->
+
+
+</body>
+</html>

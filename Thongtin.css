@@ -1,0 +1,514 @@
+body{
+    /* background-color: #f8f9fa; */
+    height: 1200px;
+    
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 25px 20px;
+    width: 100%;
+    margin-left: -20px;
+    top: 0;
+    border-radius: 5px;
+    position: fixed;
+    z-index: 1000;
+    border-bottom: 1px solid #E0E0E0;
+   
+    
+}
+.header-logo{
+    padding-right: 30px;
+    width: 150px;
+    margin-left: 100px;
+    
+}
+#server-time-clock{
+    
+/* padding-right: 30px; */
+white-space: nowrap;
+font-size: 12px;
+color: #1f2230;
+cursor: pointer;
+display: flex;
+flex-direction: column;
+margin-right: -100px;
+/* margin-left: 20px; */
+/* padding-left: 50px; */
+}
+.log{
+    margin-right: 113px;
+    
+}
+
+ .main-menu {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    margin-left: -100px;
+}
+
+.menu-list {
+    list-style-type: none;
+    margin: auto 16px;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 26px;
+    margin-left: 25px;
+}
+
+.menu-list > li {
+    position: relative;
+    padding: 10px 20px;
+    margin-right: 1px;
+    
+}
+
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1000;
+    width: 350px;
+}
+
+/* .menu-item-has-children{
+    margin-right: -2px;
+} */
+.menu-item-has-children:hover .submenu {
+    display: block;
+    position: absolute;
+}
+
+.submenu li {
+    
+    padding: 10px 20px;
+    /* background-color: red; */
+}
+
+/* Định dạng cho từng item menu */
+.menu-list > li > a {
+    text-decoration: none;
+    color: #1f2230;
+    font-weight: bold;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+/* Hiệu ứng hover cho các mục menu chính */
+.menu-list > li > a:hover {
+    color: #b41712;
+}
+
+/* Submenu link */
+.submenu li a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Hiệu ứng hover cho các mục submenu */
+.submenu li a:hover {
+    color: #b41712;
+}
+.arrow {
+    font-size: 20px; 
+    margin-left: 8px; 
+    margin-top: 4px;
+    transition: transform 0.3s ease; 
+}
+
+
+
+.menu-item-has-children:hover .arrow {
+    transform: rotate(180deg); 
+}
+
+
+.detail-button {
+    background: #1f2230; 
+    color: #fff; 
+    position: relative; 
+    z-index: 1; 
+    white-space: nowrap; 
+    border-radius: 5px; 
+    padding: 10px 20px; 
+    font-size: 18px; 
+    cursor: pointer;
+    }
+    
+    /* Hiệu ứng nền cho phần tử trước */
+    .detail-button::before {
+    width: 100%; 
+    height: 100%; 
+    content: ""; 
+    margin: auto; 
+    position: absolute; 
+    top: 0%; 
+    left: 0%; 
+    background: #b41712; 
+    transition: all 0.52s; 
+    z-index: -1; 
+    border-radius: 5px;
+    }
+    
+    /* Hiệu ứng nền cho phần tử sau */
+    .detail-button::after {
+    width: 100%; 
+    height: 100%; 
+    content: ""; 
+    margin: auto; 
+    position: absolute;
+    top: 0%; 
+    left: 0%; 
+    background: #b41712; 
+    transition: all 0.52s; 
+    z-index: -1; 
+    border-radius: 5px;
+    }
+    
+    
+    .detail-button:hover {
+    color: #fff; 
+    }
+    
+    
+    .detail-button:hover::before {
+    transform: rotateX(90deg); 
+    }
+    
+    
+    .detail-button:hover::after {
+    transform: rotateY(90deg); 
+    }
+
+
+    #user-submenu {
+        display: none;
+        position: absolute;
+        top: 100%; /* Đặt dưới #login */
+        left: 0; /* Căn trái với #login */
+        background-color: #eee;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        z-index: 1000;
+        width: 200px;
+        
+    }
+    
+    #user-submenu ul{
+        margin-top: -2px;
+    }
+    
+    /* Chỉ hiện submenu khi hover vào #login với lớp logged-in */
+    #login.logged-in:hover #user-submenu {
+        display: block !important;
+    }
+    
+    #user-submenu li {
+        padding: 10px 20px;
+        display: flex;
+    }
+    
+    #user-submenu li i {
+        color: black;
+        margin-right: 10px;
+        
+    }
+    
+    
+    #user-submenu li a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        display: block;
+        margin-top: -2px;
+    }
+    
+    #user-submenu li a:hover {
+        color: #b41712;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+.nav button{
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin: 5px 0;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #333;
+    text-decoration: none;
+    font-size: 18.5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 240px;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+.nav button:hover {
+    background-color:  #c82333;
+    color: #fff;
+
+}
+
+.nav-link i {
+    margin-right: 15px;
+}
+ul li{
+        margin-right: 50px;
+    }
+    .form-inner{
+        position: relative;
+        margin-bottom: 15px;
+    }
+    label{
+        color: #a9afbc;
+        font-size: 17px;
+        position: absolute;
+        padding: 0 5px;
+        left: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #fff;
+        pointer-events: none;
+        transition: all 0.3s ease-in-out;
+    }
+    .form-inner input:focus, .form-inner select:focus {
+        border: 2px solid #b41712 !important;
+        box-shadow: none !important;
+    }
+    .form-inner input:focus + label , .form-inner input:valid + label{
+        top: 0px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #b41712;
+    }
+    input{
+        background-color: #fff;
+        font-size: inherit;
+        outline: none;
+        border: 1px solid #dadce0;
+        padding: 10px;
+        border-radius: 5px;
+        color: #202124;
+        transition: all 0.3s ease-in-out;
+        font-size: 18px;
+    }
+    #Gender{
+        font-size: inherit;
+        outline: none;
+        border: 1px solid #dadce0;
+        padding: 10px;
+        border-radius: 5px;
+        color: #202124;
+        font-size: 18px;
+    }
+    .label-form-gender , .label-form-date,.label-form-month,.label-form-year,.label-form-city,.label-form-quan,.label-form-xa,.label-form-NH{
+        font-size: 17px;
+        position: absolute;
+        top: 0px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #b41712;
+        background-color: #FFFFFF;
+    }
+    
+    
+    #birthday:focus, #birthdayMonth:focus,#birthdayYear:focus {
+        border: 2px solid #b41712 !important;
+        box-shadow: none !important; /* Xóa hiệu ứng viền màu xanh */
+    }
+
+    .personal-info {
+        
+        flex-flow: row;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+    .button-group .profile-btn {
+        border-radius: 30px;
+        border: none;
+        outline: none;
+        padding: 13px 20px;
+        background-color: #b41712;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: Montserrat, sans-serif;
+        transition: all .42s ease-in-out;
+        border: 1px solid #b41712;
+        margin-right: 20px;
+        text-align: center;
+        
+    }
+    
+    .form-wrapper input, select {
+    border: 1px solid #eee;
+    height: 50px;
+    width: 100%;
+    padding: 10px 20px;
+    transition: .4s ease;
+    }
+    
+    .row.layout {
+border: 1px solid #eee;
+padding-top: 25px;
+padding-bottom: 25px;
+}
+    .row.layout:first-child {
+border-top: 1px solid #eee;
+}
+
+
+
+
+
+
+
+
+
+
+    .dashboard-card .header {
+        background: #1f2230;
+        border-radius: 4px 4px 0 0;
+        padding: 10px 20px;
+        color: #fff;
+        /* width: 711px; */
+    }
+    .rating-flex {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 35px;
+    }
+    .rating-div {
+background: #FFFFFF;
+border: 1px solid #E0E0E0;
+border-radius: 2px;
+padding: 16px;
+width: 25%;
+}
+    .rating-number {
+font-weight: 600;
+font-size: 22px;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.2rem;
+}
+
+.table-wrapper {
+width: 100%;
+overflow-x: auto;
+margin-bottom: 30px;
+box-shadow: 5px 2px 30px rgba(0, 0, 0, .06);
+background-color: #fff;
+}
+.dataTables_wrapper {
+position: relative;
+clear: both;
+}
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+color: inherit;
+}
+label {
+display: inline-block;
+}
+.dataTables_wrapper .dataTables_length select {
+border: 1px solid #aaa;
+border-radius: 3px;
+padding: 5px;
+background-color: transparent;
+padding: 4px;
+}
+.dataTables_wrapper .dataTables_filter {
+float: right;
+text-align: right;
+}
+.dataTables_wrapper .dataTables_filter input {
+border: 1px solid #aaa;
+border-radius: 3px;
+padding: 5px;
+background-color: transparent;
+margin-left: 3px;
+}
+table {
+border: 1px solid #f1f1f1;
+border-bottom: 1px;
+;
+}
+table.dataTable {
+width: 100%;
+margin: 0 auto;
+clear: both;
+border-collapse: separate;
+border-spacing: 0;
+}
+/* table.dataTable.no-footer {
+border-bottom: unset !important;
+} */
+.eg-table thead {
+background: #f1f1f1;
+}
+.eg-table thead tr {
+border-width: 1px;
+}
+
+.nav-link.active {
+background-color: #c82333 !important; /* màu đỏ nổi bật */
+color: #fff;
+}
+
+.current-page {
+font-family:  'Montserrat', sans-serif;
+font-style: normal;
+font-weight: 600;
+font-size: 28px;
+line-height: 36px;
+color: #121212;
+margin: 0;
+}
+
+.link-redirect {
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 22px;
+color: #787878;
+margin-bottom: 0;
+margin-top: 18px;
+}
+.link-redirect a{
+background-color: transparent;
+text-decoration: none;
+color: inherit;
+}
+.dashboard-profile {
+box-shadow: 5px 2px 30px rgba(0, 0, 0, .06);
+border-radius: 10px;
+background-color: #fff;
+}

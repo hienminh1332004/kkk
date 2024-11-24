@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="timkiemdaugia.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+</head>
+
+<body>
+
+    <header style="background-color: white; width: 100%" class="scroll-down-header">
+        <header class="header-container">
+            <div class="header-logo" >
+                <a href="">
+                    <img alt="image" src="https://lacvietauction.vn/files/frontend/images/core/logo-dau-gia-lac-viet.png" style="width: 200.73px; height: 56.5px;">
+                </a>
+            </div>
+            <div class="main-menu">
+                <ul class="menu-list">
+                    <li class="menu-item-has-children">
+                        <a href="">Tài sản đấu giá <span class="arrow">▲</span></a>
+                        <ul class="submenu">
+                            <li><a href="">Tài sản nhà nước</a></li>
+                            <li><a href="">Bất động sản</a></li>
+                            <li><a href="">Phương tiện - xe cộ</a></li>
+                            <li><a href="">Sưu tầm - nghệ thuật</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="menu-item-has-children">
+                        <a href="">Cuộc đấu giá <span class="arrow">▲</span></a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="">Cuộc đấu giá sắp đấu giá</a>
+                            </li>
+                            <li>
+                                <a href="">Cuộc đấu giá đang diễn ra</a>
+                            </li>
+                            <li>
+                                <a href="">Cuộc đấu giá đã kết thúc</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="">Tin tức <span class="arrow">▲</span></a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="">Thông báo</a>
+                            </li>
+                            <li>
+                                <a href="">Thông báo đấu giá</a>
+                            </li>
+                            <li>
+                                <a href="">Tin khác</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">Giới thiệu</a>
+                    </li>
+                    <li>
+                        <a href="">Liên hệ</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="server-time-clock" data-v-65fff26b="" aria-haspopup="true" class="wrapper-AtBcr u-isActionable u-textLeft u-inlineBlock u-borderNone u-textBold u-textNoWrap Arrange Arrange--middle u-userLauncherColor" data-time="1727859990800" >
+               
+                    <div style="font-size: 30px; font-weight: bold;" id="time-part1"></div>
+                    <div style="font-size: 18px;" id="date-part1"></div>
+            </div>
+            <div class="detail-button" id="login" onclick="openModalLogin()" style="height:50px; width: 165px ;">
+                <a style="font-size: 25px; text-decoration: none; align-items: center; color: white; font-weight: bold;font-family: Montserrat,sans-serif;" href="javascript:void(0)">Đăng Nhập</a>
+            </div>
+        </header>
+    </header>
+    <div class="overlay" id="overlay" onclick="closeModalLogin()">
+        <div class="login-container" id="login-container" onclick="event.stopPropagation();">
+            <div class="close-button" id="close-button" onclick="closeModalLogin(event)">×</div>
+            <img alt="Company Logo" height="80" src="https://storage.googleapis.com/a1aa/image/FSnunffK7RlPzE9m8IkGiRiEhOAH6OQjQfvuVdEpOoMGbDSnA.jpg" width="80"/>
+            <h1>ĐẤU GIÁ LẠC VIỆT</h1>
+            <p>
+                Bạn chưa có tài khoản? 
+                <a href="#">Đăng Ký Ngay</a>
+            </p>
+            <form>
+                <label for="username">Tên đăng nhập / Email</label>
+                <input id="username" placeholder="Nhập tên đăng nhập/Email" type="text" required />
+                <label for="password">Mật khẩu</label>
+                <input id="password" placeholder="Mật khẩu" type="password" required />
+                <button type="submit">ĐĂNG NHẬP</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModalLogin() {
+            var overlay = document.getElementById('overlay');
+            var loginContainer = document.getElementById('login-container');
+
+            // Hiển thị overlay và form đăng nhập
+            overlay.style.display = 'flex';
+            loginContainer.classList.remove('hide'); // Đảm bảo form không có class 'hide' khi mở
+        }
+
+        function closeModalLogin(event) {
+            event.stopPropagation(); // Ngăn chặn sự kiện nổi bọt
+
+            var loginContainer = document.getElementById('login-container');
+            loginContainer.classList.add('hide'); // Thêm class để kích hoạt animation đóng
+
+            // Đợi animation đóng xong trước khi ẩn hoàn toàn overlay
+            setTimeout(function() {
+                document.getElementById('overlay').style.display = 'none';
+            }, 250); // Delay tương ứng với thời gian của animation (0.5s)
+        }
+
+        // Đảm bảo nút "×" hoạt động chính xác
+        document.getElementById('close-button').addEventListener('click', function(event) {
+            closeModalLogin(event); // Gọi hàm đóng cửa sổ khi nhấp vào dấu "×"
+        });
+
+         // Đóng modal khi nhấn ra ngoài form
+         document.getElementById('overlay').addEventListener('click', function(event) {
+            closeModalLogin(event);
+        });
+    </script>
+        <script>
+            function updateTimeAndDate() {
+            const timeElement = document.getElementById('time-part1');
+            const dateElement = document.getElementById('date-part1');
+
+        // Lấy thời gian hiện tại ở múi giờ Việt Nam (Asia/Ho_Chi_Minh)
+        const vietnamTime = new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" });
+        const currentDate = new Date(vietnamTime);
+
+        // Định dạng giờ phút giây
+        const hours = String(currentDate.getHours()).padStart(2, '0');
+        const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+        const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+
+        timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+
+    // Định dạng ngày tháng
+    const days = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+    const dayOfWeek = days[currentDate.getDay()];
+    const day = currentDate.getDate();
+    const month = currentDate.getMonth() + 1; // Tháng bắt đầu từ 0
+    const year = currentDate.getFullYear();
+
+    dateElement.textContent = `${dayOfWeek}, ${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
+        }
+
+    // Cập nhật mỗi giây
+    setInterval(updateTimeAndDate, 1000);
+
+    // Gọi hàm ngay khi tải trang
+     updateTimeAndDate();
+
+        </script>   
+    
+</header>
+    <div class="container">
+        <div id="banner-new" style="transform:translateY(-50px); margin-left: -35px; padding-top: 10px; padding-bottom: 16px; background-image: url('');background-position: right;  background-repeat: no-repeat; background-size: contain">
+            <h2 class="current-page">Danh sách cuộc đấu giá</h2>
+            <div class="link-redirect">
+                <a  class="page-index" href="/home.html">Trang chủ</a> / <span class="page-des ellipsis1 currentPageDetail" style="font-weight: bold;">Cuộc đấu giá</span>
+            </div>
+        </div>
+
+        <div class="row high-padding" style="transform: translatey(-180px);">
+            <hr>
+            <div class="col-lg-3 col-md-4 sidebar-content">
+                <div class="blog-widget-item fadeInUp" data-wow-duration="1.5s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 1.5s; animation-name: fadeInUp;">
+                    <div class="search-area">
+                        <div class="sidebar-widget-title">
+                            <div class="sidebar-widget-title">
+                                <h4>Tìm kiếm</h4>
+                                <span class="hight-light"></span>
+                            </div>
+                            
+                            <div class="sidebar-widget-title-tools">
+                                <div class="filter-mobile">
+                                    <div class="dropdown">
+                                        <button class="btn btn-default filter-button-mobile" id="dropdownMenuClickableInside" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" onclick="nstSliderMobile()" aria-expanded="false">
+                                            <p>
+                                                Bộ Lọc
+                                            </p>
+                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3.29701 5.2338C3.52243 4.27279 4.27279 3.52243 5.2338 3.29701V3.29701C6.06663 3.10165 6.93337 3.10165 7.7662 3.29701V3.29701C8.72721 3.52243 9.47757 4.27279 9.70299 5.2338V5.2338C9.89835 6.06663 9.89835 6.93337 9.70299 7.7662V7.7662C9.47757 8.72721 8.72721 9.47757 7.7662 9.70299V9.70299C6.93337 9.89835 6.06663 9.89835 5.2338 9.70299V9.70299C4.27279 9.47757 3.52243 8.72721 3.29701 7.7662V7.7662C3.10166 6.93337 3.10166 6.06663 3.29701 5.2338V5.2338Z" stroke="#363853" stroke-width="1.5"></path>
+                                                <path d="M3.29701 16.2338C3.52243 15.2728 4.27279 14.5224 5.2338 14.297V14.297C6.06663 14.1017 6.93337 14.1017 7.7662 14.297V14.297C8.72721 14.5224 9.47757 15.2728 9.70299 16.2338V16.2338C9.89835 17.0666 9.89835 17.9334 9.70299 18.7662V18.7662C9.47757 19.7272 8.72721 20.4776 7.7662 20.703V20.703C6.93337 20.8983 6.06663 20.8983 5.2338 20.703V20.703C4.27279 20.4776 3.52243 19.7272 3.29701 18.7662V18.7662C3.10166 17.9334 3.10166 17.0666 3.29701 16.2338V16.2338Z" stroke="#363853" stroke-width="1.5"></path>
+                                                <path d="M14.297 5.2338C14.5224 4.27279 15.2728 3.52243 16.2338 3.29701V3.29701C17.0666 3.10165 17.9334 3.10165 18.7662 3.29701V3.29701C19.7272 3.52243 20.4776 4.27279 20.703 5.2338V5.2338C20.8983 6.06663 20.8983 6.93337 20.703 7.7662V7.7662C20.4776 8.72721 19.7272 9.47757 18.7662 9.70299V9.70299C17.9334 9.89835 17.0666 9.89835 16.2338 9.70299V9.70299C15.2728 9.47757 14.5224 8.72721 14.297 7.7662V7.7662C14.1017 6.93337 14.1017 6.06663 14.297 5.2338V5.2338Z" stroke="#363853" stroke-width="1.5"></path>
+                                                <path d="M14.297 16.2338C14.5224 15.2728 15.2728 14.5224 16.2338 14.297V14.297C17.0666 14.1017 17.9334 14.1017 18.7662 14.297V14.297C19.7272 14.5224 20.4776 15.2728 20.703 16.2338V16.2338C20.8983 17.0666 20.8983 17.9334 20.703 18.7662V18.7662C20.4776 19.7272 19.7272 20.4776 18.7662 20.703V20.703C17.9334 20.8983 17.0666 20.8983 16.2338 20.703V20.703C15.2728 20.4776 14.5224 19.7272 14.297 18.7662V18.7662C14.1017 17.9334 14.1017 17.0666 14.297 16.2338V16.2338Z" stroke="#363853" stroke-width="1.5"></path>
+                                            </svg>
+                                        </button>
+                                        
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="blog-widget-body">
+                            <form>
+                                <div class="form-inner">
+                                    <div class="filter-search">
+                                        <input type="search" id="filterKeyword" class="search-field" placeholder="Nhập từ khóa..." value="" name="s">
+                                    </div>
+                                    <div class="filter-date" >
+                                        <div class="filter-date-body" style="display: flex; gap: 5px; margin-bottom: 15px;">
+                                            <div class="from-date-container">
+                                                <label style="font-weight: 600;">Từ ngày</label>
+                                                <div id="fromDate" class="input-group date datepicker" data-date-format="mm-dd-yyyy" style="padding:0">
+                                                    <span class="input-group-addon" style="background-color: white; border: unset; border-bottom: 1px solid #e5ecef; border-radius: 0; padding: 5px; "><svg class="svg-inline--fa fa-calendar" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M96 32V64H48C21.5 64 0 85.5 0 112v48H448V112c0-26.5-21.5-48-48-48H352V32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H160V32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192H0V464c0 26.5 21.5 48 48 48H400c26.5 0 48-21.5 48-48V192z"></path></svg><!-- <i class="fa-solid fa-calendar"></i> Font Awesome fontawesome.com --></span>
+                                                    <input class="form-control" type="text" style="border: none; border-bottom: 1px solid #e5ecef; box-shadow: unset; border-radius: 0;">
+                                                </div>
+                                            </div>
+                                            <div class="to-date-container">
+                                                <label style="font-weight: 600;">Đến ngày</label>
+                                                <div id="toDate" class="input-group date datepicker" data-date-format="mm-dd-yyyy" style="padding:0">
+                                                    <span class="input-group-addon" style="background-color: white; border: unset; border-bottom: 1px solid #e5ecef; border-radius: 0; padding: 5px; "><svg class="svg-inline--fa fa-calendar" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M96 32V64H48C21.5 64 0 85.5 0 112v48H448V112c0-26.5-21.5-48-48-48H352V32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H160V32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192H0V464c0 26.5 21.5 48 48 48H400c26.5 0 48-21.5 48-48V192z"></path></svg><!-- <i class="fa-solid fa-calendar"></i> Font Awesome fontawesome.com --></span>
+                                                    <input class="form-control" type="text" style="border: none; border-bottom: 1px solid #e5ecef; box-shadow: unset; border-radius: 0;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class=" ">
+                                            <input type="button" class="button Buttonbtn" id="btnFilterCategory" value="Lọc">
+                                            <input id="btnCleanFilterCategory" type="button" style="display:none" class="button Buttonbtn" value="Bỏ Lọc">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+    
+    
+                <aside id="Auction-Property-Status" class="widget woocommerce widget_product_categories">
+                    <div class="blog-widget-item fadeInUp" data-wow-duration="1.5s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 1.5s; animation-name: fadeInUp;">
+                        <div class="search-area">
+                            <div class="sidebar-widget-title">
+                                <h4>Trạng thái tài sản</h4>
+                                <span class="hight-light"></span>
+                            </div>
+                            <div class="blog-widget-body">
+                                <form>
+                                    <div class="form-inner">
+                                        <label class="containercheckbox">
+                                            Tất cả <span id="count-all"></span>
+                                            <input type="checkbox" class="status-checkall" name="checkbox-status" value="0" style="transform: translateX(-28px);">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="containercheckbox">
+                                            Sắp diễn ra
+                                            <input type="checkbox" class="checkbox-status" name="checkbox-auctiontype" checked=""  value="1">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="containercheckbox">
+                                            Đang diễn ra
+                                            <input type="checkbox" class="checkbox-status" name="checkbox-status" value="2" style="transform: translateX(-7px);">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="containercheckbox">
+                                            Đã kết thúc
+                                            <input type="checkbox" class="checkbox-status" name="checkbox-status" value="3" style="transform: translateX(-1px);">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                            <script>
+                                const checkAll = document.querySelector('.status-checkall');
+                                const checkboxes = document.querySelectorAll('.checkbox-status');
+
+                                // Sự kiện khi chọn checkbox "Tất cả"
+                                checkAll.addEventListener('change', function() {
+                                    if (checkAll.checked) {
+                                        // Bỏ chọn tất cả các checkbox khác
+                                        checkboxes.forEach(checkbox => {
+                                            checkbox.checked = false;
+                                        });
+                                    }
+                                });
+
+                                // Sự kiện khi chọn bất kỳ checkbox nào khác
+                                checkboxes.forEach(checkbox => {
+                                    checkbox.addEventListener('change', function() {
+                                        // Nếu bất kỳ checkbox nào khác được chọn, bỏ chọn checkbox "Tất cả"
+                                        if (checkbox.checked) {
+                                            checkAll.checked = false;
+                                        }
+                                    });
+                                });
+
+
+                            </script>
+                        </div>
+                    </div>
+                </aside>
+                <aside id="Auction-Property-Status" class="widget woocommerce widget_product_categories">
+                    <div class="blog-widget-item fadeInUp" data-wow-duration="1.5s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 1.5s; animation-name: fadeInUp;">
+                        <div class="search-area">
+                            <div class="sidebar-widget-title">
+                                <h4>Hình thức đấu giá</h4>
+                                <span class="hight-light"></span>
+                            </div>
+                            <div class="blog-widget-body">
+                                <form>
+                                    <div class="form-inner">
+                                        <label class="containercheckbox">
+                                            Tất cả
+                                            <input type="checkbox" class="checkbox-auctiontype-all" value="0" name="checkbox-auctiontype" checked="" style="transform: translateX(17px);">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="containercheckbox">
+                                            Đấu giá tài sản công
+                                            <input type="checkbox" class="checkbox-type" name="checkbox-status" value="1000001" style="transform: translateX(-40px);">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="containercheckbox">
+                                            Đấu giá tự nguyện
+                                            <input type="checkbox" class="checkbox-type" name="checkbox-status" value="1000002" style="transform: translateX(-32px);">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                            <script>
+                                const checktypeAll = document.querySelector('.checkbox-auctiontype-all');
+                                const typecheckboxes = document.querySelectorAll('.checkbox-type');
+
+                                // Sự kiện khi chọn checkbox "Tất cả"
+                                checktypeAll.addEventListener('change', function() {
+                                    if (checktypeAll.checked) {
+                                        // Bỏ chọn tất cả các checkbox khác
+                                        typecheckboxes.forEach(checkbox => {
+                                            checkbox.checked = false;
+                                        });
+                                    }
+                                });
+
+                                // Sự kiện khi chọn bất kỳ checkbox nào khác
+                                typecheckboxes.forEach(checkbox => {
+                                    checkbox.addEventListener('change', function() {
+                                        // Nếu bất kỳ checkbox nào khác được chọn, bỏ chọn checkbox "Tất cả"
+                                        if (checkbox.checked) {
+                                            checktypeAll.checked = false;
+                                        }
+                                    });
+                                });
+
+
+                            </script>
+                        </div>
+                    </div>
+                </aside>
+    
+            </div>
+            <div class="col-lg-9 col-md-8">
+                <div class="view-list">
+                    <select id="FilterSort">
+                        <option value="1">Mới → Cũ</option>
+                        <option value="2">Cũ → Mới</option>
+                    </select>
+                    <div class="view-mode">
+                        <button onclick="myFunctionList('list')" class="DateTimeFilter-ListButton">
+                            <i class="fas fa-list" style="color: black;"></i>
+                        </button>
+                        <button onclick="myFunctionList('grid')" class="DateTimeFilter-BorderButton">
+                            <i class="fas fa-border-all" style="color: lightgray;"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row gy-4 mb-60 d-flex list-item">
+                    <div class="col-sm-12 item-property col-lg-4 col-md-4" data-id="1002058" data-openingprice="undefined" data-propertystatusid="1000002" data-createdtime="2024-10-23T19:23:30">
+                        <div data-wow-duration="1.5s" data-wow-delay="0.2s" class="eg-card auction-card1 animate-up fadeInDown">
+                            <div class="auction-img">
+                                <a href=""><img class="auction-img-background lazy lz-entered lz-loaded" alt="image" data-src="" data-ll-status="loaded" src="" style="height: 200px;"></a>
+                                        <div class="auction-timer">
+                                            <div class="countdown" id="timer6">
+                                                <h4>
+                                                   <span>06/11/2024 09:00:00</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                <div class="author-area">
+                                     
+                                </div>
+                            </div>
+                            <div class="auction-content">
+                                <h4><a class="" href=""></a></h4>
+                                            <p>Trạng thái : <span class="auctio-status auction-waiting">Chưa diễn ra</span></p>
+                                            <div class="button-group">
+                                                <div class="detail-button">
+                                                    <a href="#">Chi tiết</a>
+                                                </div>
+                                                <div class="detail-button" style="display: none;">
+                                                    <a href="#">Cập nhật</a>
+                                                </div>
+                                                <div class="detail-button" style="display: none;">
+                                                    <a href="#">Xóa</a>
+                                                </div>
+                                            </div>
+                                            
+                            </div>
+                        </div>
+                    </div><div class="col-sm-12 item-property col-lg-4 col-md-4" data-id="1002059" data-openingprice="undefined" data-propertystatusid="1000002" data-createdtime="2024-10-23T19:28:08">
+                        <div data-wow-duration="1.5s" data-wow-delay="0.2s" class="eg-card auction-card1 animate-up fadeInDown">
+                            <div class="auction-img">
+                                <a href=""><img class="auction-img-background lazy lz-entered lz-loaded" alt="image" data-src="" data-ll-status="loaded" src=" style="height: 200px;"></a>
+                                        <div class="auction-timer">
+                                            <div class="countdown" id="timer6">
+                                                <h4>
+                                                   <span>06/11/2024 09:30:00</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                <div class="author-area">
+                                     
+                                </div>
+                            </div>
+                            <div class="auction-content">
+                                <h4><a class="" href="">  </a></h4>
+                                            <p>Trạng thái : <span class="auctio-status auction-waiting">Chưa diễn ra</span></p>
+                                <div class="auction-card-bttm">
+                                    <div class="button-group">
+                                        <div class="detail-button">
+                                            <a href="#">Chi tiết</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Cập nhật</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Xóa</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="col-sm-12 item-property col-lg-4 col-md-4" data-id="1002052" data-openingprice="undefined" data-propertystatusid="1000002" data-createdtime="2024-10-18T15:06:57.15">
+                        <div data-wow-duration="1.5s" data-wow-delay="0.2s" class="eg-card auction-card1 animate-up fadeInDown">
+                            <div class="auction-img">
+                                <a href=""><img class="auction-img-background lazy lz-entered lz-loaded" alt="image" data-src="" data-ll-status="loaded" src="" style="height: 200px;"></a>
+                                        <div class="auction-timer">
+                                            <div class="countdown" id="timer6">
+                                                <h4>
+                                                   <span>07/11/2024 14:30:00</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                <div class="author-area">
+                                     
+                                </div>
+                            </div>
+                            <div class="auction-content">
+                                <h4><a class="" href=""></a></h4>
+                                            <p>Trạng thái : <span class="auctio-status auction-waiting">Chưa diễn ra</span></p>
+                                <div class="auction-card-bttm">
+                                    <div class="button-group">
+                                        <div class="detail-button">
+                                            <a href="#">Chi tiết</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Cập nhật</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Xóa</a>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="col-sm-12 item-property col-lg-4 col-md-4" data-id="1002066" data-openingprice="undefined" data-propertystatusid="1000002" data-createdtime="2024-11-01T12:34:53.597">
+                        <div data-wow-duration="1.5s" data-wow-delay="0.2s" class="eg-card auction-card1 animate-up fadeInDown">
+                            <div class="auction-img">
+                                <a href=""><img class="auction-img-background lazy lz-entered lz-loaded" alt="image" data-src="" data-ll-status="loaded" src="" style="height: 200px;"></a>
+                                        <div class="auction-timer">
+                                            <div class="countdown" id="timer6">
+                                                <h4>
+                                                   <span>14/11/2024 15:30:00</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                <div class="author-area">
+                                     
+                                </div>
+                            </div>
+                            <div class="auction-content">
+                                <h4><a class="" href=""></a></h4>
+                                            <p>Trạng thái : <span class="auctio-status auction-waiting">Chưa diễn ra</span></p>
+                                <div class="auction-card-bttm">
+                                    <div class="button-group">
+                                        <div class="detail-button">
+                                            <a href="#">Chi tiết</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Cập nhật</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Xóa</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="col-sm-12 item-property col-lg-4 col-md-4" data-id="1002065" data-openingprice="undefined" data-propertystatusid="1000002" data-createdtime="2024-11-01T12:33:26.117">
+                        <div data-wow-duration="1.5s" data-wow-delay="0.2s" class="eg-card auction-card1 animate-up fadeInDown">
+                            <div class="auction-img">
+                                <a href=""><img class="auction-img-background lazy lz-entered lz-loaded" alt="image" data-src="" style="height: 200px;"></a>
+                                        <div class="auction-timer">
+                                            <div class="countdown" id="timer6">
+                                                <h4>
+                                                   <span>14/11/2024 16:15:00</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                <div class="author-area">
+                                     
+                                </div>
+                            </div>
+                            <div class="auction-content">
+                                <h4><a class="" href=""></a></h4>
+                                            <p>Trạng thái : <span class="auctio-status auction-waiting">Chưa diễn ra</span></p>
+                                <div class="auction-card-bttm">
+                                    <div class="button-group">
+                                        <div class="detail-button">
+                                            <a href="#">Chi tiết</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Cập nhật</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Xóa</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="col-sm-12 item-property col-lg-4 col-md-4" data-id="1002051" data-openingprice="undefined" data-propertystatusid="1000002" data-createdtime="2024-10-17T16:28:04">
+                        <div data-wow-duration="1.5s" data-wow-delay="0.2s" class="eg-card auction-card1 animate-up fadeInDown">
+                            <div class="auction-img">
+                                <a href=""><img class="auction-img-background lazy lz-entered lz-loaded" alt="image" data-src="" data-ll-status="loaded" src=" style="height: 200px;"></a>
+                                        <div class="auction-timer">
+                                            <div class="countdown" id="timer6">
+                                                <h4>
+                                                   <span>15/11/2024 14:00:00</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                <div class="author-area">
+                                       <div class="author-emo">
+                                <img alt="image" src="">
+                            </div>
+                                </div>
+                            </div>
+                            <div class="auction-content">
+                                <h4><a class="" href=""></a></h4>
+                                            <p>Trạng thái : <span class="auctio-status auction-waiting">Chưa diễn ra</span></p>
+                                <div class="auction-card-bttm">
+                                    <div class="button-group">
+                                        <div class="detail-button">
+                                            <a href="#">Chi tiết</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Cập nhật</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Xóa</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="col-sm-12 item-property col-lg-4 col-md-4" data-id="1002054" data-openingprice="undefined" data-propertystatusid="1000002" data-createdtime="2024-10-23T09:41:10.867">
+                        <div data-wow-duration="1.5s" data-wow-delay="0.2s" class="eg-card auction-card1 animate-up fadeInDown">
+                            <div class="auction-img">
+                                <a href=""><img class="auction-img-background lazy" alt="image" data-src="" style="height: 200px;"></a>
+                                        <div class="auction-timer">
+                                            <div class="countdown" id="timer6">
+                                                <h4>
+                                                   <span>05/12/2024 09:00:00</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                <div class="author-area">
+                                     
+                                </div>
+                            </div>
+                            <div class="auction-content">
+                                <h4><a class="" href=""></a></h4>
+                                            <p>Trạng thái : <span class="auctio-status auction-waiting">Chưa diễn ra</span></p>
+                                <div class="auction-card-bttm">
+                                    <div class="button-group">
+                                        <div class="detail-button">
+                                            <a href="#">Chi tiết</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Cập nhật</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Xóa</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="col-sm-12 item-property col-lg-4 col-md-4" data-id="1002055" data-openingprice="undefined" data-propertystatusid="1000002" data-createdtime="2024-10-23T10:00:30.75">
+                        <div data-wow-duration="1.5s" data-wow-delay="0.2s" class="eg-card auction-card1 animate-up fadeInDown">
+                            <div class="auction-img">
+                                <a href=""><img class="auction-img-background lazy" alt="image" data-src="" style="height: 200px;"></a>
+                                        <div class="auction-timer">
+                                            <div class="countdown" id="timer6">
+                                                <h4>
+                                                   <span>05/12/2024 09:00:00</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                <div class="author-area">
+                                     
+                                </div>
+                            </div>
+                            <div class="auction-content">
+                                <h4><a class="" href=""></a></h4>
+                                            <p>Trạng thái : <span class="auctio-status auction-waiting">Chưa diễn ra</span></p>
+                                <div class="auction-card-bttm">
+                                    <div class="button-group">
+                                        <div class="detail-button">
+                                            <a href="#">Chi tiết</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Cập nhật</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Xóa</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="col-sm-12 item-property col-lg-4 col-md-4" data-id="1002056" data-openingprice="undefined" data-propertystatusid="1000002" data-createdtime="2024-10-23T11:12:31.76">
+                        <div data-wow-duration="1.5s" data-wow-delay="0.2s" class="eg-card auction-card1 animate-up fadeInDown">
+                            <div class="auction-img">
+                                <a href=""><img class="auction-img-background lazy" alt="image" data-src="" style="height: 200px;"></a>
+                                        <div class="auction-timer">
+                                            <div class="countdown" id="timer6">
+                                                <h4>
+                                                   <span>05/12/2024 09:00:00</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                <div class="author-area">
+                                     
+                                </div>
+                            </div>
+                            <div class="auction-content">
+                                <h4><a class="" href=""></a></h4>
+                                            <p>Trạng thái : <span class="auctio-status auction-waiting">Chưa diễn ra</span></p>
+                                <div class="auction-card-bttm">
+                                    <div class="button-group">
+                                        <div class="detail-button">
+                                            <a href="#">Chi tiết</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Cập nhật</a>
+                                        </div>
+                                        <div class="detail-button" style="display: none;">
+                                            <a href="#">Xóa</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div></div>                                         
+
+                
+                <div class="row">
+                    <nav class="pagination-wrap">
+                        <div class="manage-auction-pagination light-theme simple-pagination">
+                            <ul class="pagination d-flex justify-content-center gap-md-3 gap-2">
+                                <li class="page-item disabled">
+                                    <a class="current page-link prev">Trước </a>
+                                </li>
+                                <li class="page-item active" aria-current="page">
+                                    <a class="current page-link">1</a>
+                                </li>
+                                <li>
+                                    <a href="" class="page-link">2</a>
+                                </li>
+                                <li>
+                                    <a href="" class="page-link">3</a>
+                                </li>
+                                <li>
+                                    <a href="" class="page-link">4</a>
+                                </li>
+                                <li>
+                                    <a href="" class="page-link">5</a>
+                                </li>
+                                <li>
+                                    <a href="" class="page-link next">Tiếp</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                    const paginationWrap = document.querySelector(".pagination");
+                    const pageItems = paginationWrap.querySelectorAll(".page-item");
+                    const prevButton = paginationWrap.querySelector(".prev");
+                    const nextButton = paginationWrap.querySelector(".next");
+
+                    let currentPage = 1;
+                    const totalPages = pageItems.length - 2;
+
+                    function updatePagination() {
+                        pageItems.forEach((item, index) => {
+                            const link = item.querySelector(".page-link");
+                            if (index === currentPage) {
+                                item.classList.add("active");
+                                link.classList.add("current");
+                            } else {
+                                item.classList.remove("active");
+                                link.classList.remove("current");
+                            }
+                        });
+
+                        if (currentPage === 1) {
+                            prevButton.parentElement.classList.add("disabled");
+                        } else {
+                            prevButton.parentElement.classList.remove("disabled");
+                        }
+
+                        if (currentPage === totalPages) {
+                            nextButton.parentElement.classList.add("disabled");
+                        } else {
+                            nextButton.parentElement.classList.remove("disabled");
+                        }
+                    }
+
+                    prevButton.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        if (currentPage > 1) {
+                            currentPage--;
+                            updatePagination();
+                        }
+                    });
+
+                    nextButton.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        if (currentPage < totalPages) {
+                            currentPage++;
+                            updatePagination();
+                        }
+                    });
+
+                    pageItems.forEach((item, index) => {
+                        if (index !== 0 && index !== pageItems.length - 1) {
+                            item.addEventListener("click", (e) => {
+                                e.preventDefault();
+                                currentPage = index;
+                                updatePagination();
+                            });
+                        }
+                    });
+
+                    updatePagination();
+                });
+
+
+                </script>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

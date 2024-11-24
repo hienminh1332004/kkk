@@ -1,0 +1,351 @@
+body{
+    background-color: #fcfcfce8;
+}
+.container ul li{
+    margin-right: 50px;
+}
+.form-inner{
+    position: relative;
+    margin-bottom: 15px;
+}
+.container label{
+    color: #a9afbc;
+    font-size: 17px;
+    position: absolute;
+    padding: 0 5px;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #fff;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+}
+.form-inner input:focus {
+    border: 2px solid #b41712;
+}
+.form-inner input:focus + label , .form-inner input:valid + label{
+    top: 0px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #b41712;
+}
+.container input{
+    background-color: #fff;
+    font-size: inherit;
+    outline: none;
+    border: 1px solid #dadce0;
+    padding: 10px;
+    border-radius: 5px;
+    color: #202124;
+    transition: all 0.3s ease-in-out;
+    font-size: 18px;
+}
+#Gender{
+    font-size: inherit;
+    outline: none;
+    border: 1px solid #dadce0;
+    padding: 10px;
+    border-radius: 5px;
+    color: #202124;
+    font-size: 18px;
+}
+.container .label-form-gender ,.container .label-form-date,.container .label-form-month,.container .label-form-year,.container .label-form-NH{
+    font-size: 17px;
+    position: absolute;
+    top: 0px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #b41712;
+    background-color: #FFFFFF;
+}
+
+
+/* Thay đổi màu viền cho phần tử `select` nếu không dùng select2 */
+#birthday:focus, #birthdayMonth:focus,#birthdayYear:focus {
+    border: 2px solid #b41712 !important;
+    box-shadow: none !important; /* Xóa hiệu ứng viền màu xanh */
+}
+
+.header-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color: white;
+padding: 25px 20px;
+width: 100%;
+margin-left: 2px;
+top: 0;
+border-radius: 5px;
+position: fixed;
+z-index: 1000;
+width: 100%;
+
+
+}
+.header-logo{
+padding-right: 30px;
+width: 150px;
+margin-left: 100px;
+
+}
+#server-time-clock{
+
+/* padding-right: 30px; */
+white-space: nowrap;
+font-size: 12px;
+color: #1f2230;
+cursor: pointer;
+display: flex;
+flex-direction: column;
+margin-right: -100px;
+/* margin-left: 20px; */
+/* padding-left: 50px; */
+}
+.log{
+margin-right: 118px;
+
+}
+
+.main-menu {
+display: flex;
+justify-content: space-around;
+width: 50%;
+margin-left: -100px;
+}
+
+.menu-list {
+list-style-type: none;
+margin: auto 16px;
+padding: 0;
+display: flex;
+justify-content: space-around;
+width: 100%;
+font-size: 26px;
+}
+
+.menu-list > li {
+position: relative;
+padding: 10px 20px;
+
+}
+
+
+.submenu {
+display: none;
+position: absolute;
+top: 100%;
+left: 0;
+background-color: #ffffff;
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+list-style: none;
+padding: 0;
+margin: 0;
+z-index: 1000;
+width: 300px;
+}
+
+
+.menu-item-has-children:hover .submenu {
+display: block;
+position: absolute;
+}
+
+.submenu li {
+padding: 10px 20px;
+}
+
+/* Định dạng cho từng item menu */
+.menu-list > li > a {
+text-decoration: none;
+color: #1f2230;
+font-weight: bold;
+white-space: nowrap;
+display: flex;
+align-items: center;
+padding: 10px 20px;
+}
+
+/* Hiệu ứng hover cho các mục menu chính */
+.menu-list > li > a:hover {
+color: #b41712;
+}
+
+/* Submenu link */
+.submenu li a {
+text-decoration: none;
+color: #333;
+}
+
+/* Hiệu ứng hover cho các mục submenu */
+.submenu li a:hover {
+color: #b41712;
+}
+.arrow {
+font-size: 20px; 
+margin-left: 8px; 
+margin-top: 4px;
+transition: transform 0.3s ease; 
+}
+
+
+
+.menu-item-has-children:hover .arrow {
+transform: rotate(180deg); 
+}
+
+
+/* Đăng Nhập */
+.overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.7); 
+display: none; 
+justify-content: center; 
+align-items: center; 
+z-index: 9999; 
+}
+.login-container {
+background-color: white;
+padding: 30px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+text-align: center;
+width: 550px;
+position: relative;
+animation: slide-down 0.75s ease forwards; /* Hiệu ứng trượt xuống khi mở */
+}
+@keyframes slide-down {
+from {
+transform: translateY(-30px);
+opacity: 0;
+}
+to {
+transform: translateY(0);
+opacity: 1;
+}
+}
+@keyframes slide-up {
+from {
+transform: translateY(0);
+opacity: 1;
+}
+to {
+transform: translateY(-30px);
+opacity: 0;
+}
+}
+.login-container.hide {
+animation: slide-up 0.75s ease forwards; /* Hiệu ứng trượt lên khi đóng */
+}
+.login-container img {
+width: 80px;
+height: 80px;
+}
+.login-container h1 {
+font-size: 24px;
+color: #d32f2f;
+margin: 10px 0;
+}
+.login-container p {
+font-size: 16px;
+color: #333;
+}
+.login-container label {
+display: block;
+text-align: left;
+margin: 15px 0 5px;
+font-size: 14px;
+color: #333;
+}
+.login-container input[type="text"],
+.login-container input[type="password"] {
+width: 100%;
+padding: 10px;
+margin: 5px 0 20px;
+border: 1px solid #ccc;
+border-radius: 4px;
+font-size: 14px;
+}
+.login-container button {
+width: 100%;
+padding: 10px;
+background-color: #d32f2f;
+color: white;
+border: none;
+border-radius: 4px;
+font-size: 16px;
+cursor: pointer;
+}
+.login-container button:hover {
+background-color: #b71c1c;
+}
+.close-button {
+position: absolute;
+top: 10px;
+right: 10px;
+font-size: 20px;
+color: #d32f2f;
+cursor: pointer;
+}
+.log{
+background-color: black;
+}
+.detail-button {
+background: #1f2230; 
+color: #fff; 
+position: relative; 
+z-index: 1; 
+white-space: nowrap; 
+border-radius: 5px; 
+padding: 10px 20px; 
+font-size: 18px; 
+cursor: pointer;
+}
+
+/* Hiệu ứng nền cho phần tử trước */
+.detail-button::before {
+width: 100%; 
+height: 100%; 
+content: ""; 
+margin: auto; 
+position: absolute; 
+top: 0%; 
+left: 0%; 
+background: #b41712; 
+transition: all 0.52s; 
+z-index: -1; 
+border-radius: 5px;
+}
+
+/* Hiệu ứng nền cho phần tử sau */
+.detail-button::after {
+width: 100%; 
+height: 100%; 
+content: ""; 
+margin: auto; 
+position: absolute;
+top: 0%; 
+left: 0%; 
+background: #b41712; 
+transition: all 0.52s; 
+z-index: -1; 
+border-radius: 5px;
+}
+
+
+.detail-button:hover {
+color: #fff; 
+}
+
+
+.detail-button:hover::before {
+transform: rotateX(90deg); 
+}
+
+
+.detail-button:hover::after {
+transform: rotateY(90deg); 
+}  
